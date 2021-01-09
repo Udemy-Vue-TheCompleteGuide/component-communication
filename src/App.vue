@@ -36,9 +36,7 @@ export default {
   methods: {
     /* handling custom event form child component */
     toggleFavorite(id) {
-      let contact = this.contacts.find(function(i) {
-        return i.id === id;
-      });
+      const contact = this.contacts.find(c => c.id === id);
       contact.isFavorite = !contact.isFavorite;
     }
   }
