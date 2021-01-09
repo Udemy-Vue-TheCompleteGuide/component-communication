@@ -1,7 +1,8 @@
 <template>
   <li>
-    <h2>{{ name }}</h2>
+    <h2>{{ name }} {{ isFavorite ? '(Favorite)' : '' }}</h2>
     <button @click="toggleDetails">{{ detailsAreVisible ? 'Hide' : 'Show' }} Details</button>
+    <button @click="toggleFavorite">{{ isFavorite ? 'Remove' : 'Add' }} Favorite</button>
     <ul v-if="detailsAreVisible">
       <li>
         <strong>Phone:</strong>
@@ -22,7 +23,8 @@ export default {
     'id',
     'name',
     'phone',
-    'email'
+    'email',
+    'isFavorite'
   ],
   data() {
     return {
@@ -32,11 +34,17 @@ export default {
   methods: {
     toggleDetails() {
       this.detailsAreVisible = !this.detailsAreVisible;
+    },
+    toggleFavorite() {
+      /* send custom event from child to parent component */
+      this.$emit('toggle-favorite', this.id);
     }
   }
 }
 </script>
 
 <style scoped>
-
+button {
+  margin: 10px;
+}
 </style>

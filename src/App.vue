@@ -10,6 +10,8 @@
                      :name="contact.name"
                      :phone="contact.phone"
                      :email="contact.email"
+                     :is-favorite="contact.isFavorite"
+                     @toggle-favorite="toggleFavorite"
       ></FriendContact>
     </ul>
   </section>
@@ -26,9 +28,18 @@ export default {
   data() {
     return {
       contacts: [
-        {id: 1, name: 'Manuel Lorenz', phone: '0123 45678 90', email: 'manuel@localhost.com'},
-        {id: 2, name: 'Luisa Solis', phone: '123 473 8344', email: 'luisa@gmail.com'}
+        {id: 1, name: 'Manuel Lorenz', phone: '0123 45678 90', email: 'manuel@localhost.com', isFavorite: false},
+        {id: 2, name: 'Luisa Solis', phone: '123 473 8344', email: 'luisa@gmail.com', isFavorite: true}
       ]
+    }
+  },
+  methods: {
+    /* handling custom event form child component */
+    toggleFavorite(id) {
+      let contact = this.contacts.find(function(i) {
+        return i.id === id;
+      });
+      contact.isFavorite = !contact.isFavorite;
     }
   }
 }
